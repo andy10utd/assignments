@@ -115,7 +115,8 @@ def get_users(twitter, screen_names):
     [6253282, 783214]
     """
     ###TODO
-    pass
+    abc = robust_request(twitter, "users/lookup",{'screen_name':screen_names})
+    return abc
 
 
 def get_friends(twitter, screen_name):
@@ -140,7 +141,10 @@ def get_friends(twitter, screen_name):
     [695023, 1697081, 8381682, 10204352, 11669522]
     """
     ###TODO
-    pass
+    res = robust_request(twitter,"friends/ids",{'screen_name':screen_name})
+    res1 = [friend for friend in res]
+    ###res = sorted(res['ids'])
+    return sorted(res1)
 
 
 def add_all_friends(twitter, users):
@@ -162,7 +166,14 @@ def add_all_friends(twitter, users):
     [695023, 1697081, 8381682, 10204352, 11669522]
     """
     ###TODO
-    pass
+    res = []
+#     print(users[0])
+    for user in users:
+        fri = get_friends(twitter,user['screen_name'])
+#    result = user
+        user['friends'] = fri
+        res.append(user)
+    return None
 
 
 def print_num_friends(users):
@@ -174,7 +185,8 @@ def print_num_friends(users):
         Nothing
     """
     ###TODO
-    pass
+    for c in users:
+        print('%s %d'%(c['screen_name'],len(c['friends'])))
 
 
 def count_friends(users):
@@ -191,7 +203,8 @@ def count_friends(users):
     [(2, 3), (3, 2), (1, 1)]
     """
     ###TODO
-    pass
+    for c in users:
+        print('%s %d'%(c['screen_name'],len(c['friends'])))
 
 
 def friend_overlap(users):
