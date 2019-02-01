@@ -67,7 +67,9 @@ def read_screen_names(filename):
     ['DrJillStein', 'GovGaryJohnson', 'HillaryClinton', 'realDonaldTrump']
     """
     ###TODO
-    pass
+    fp = open(filename, 'r')
+    candidates = [i.strip() for i in fp.readlines()]
+    return candidates
 
 
 # I've provided the method below to handle Twitter's rate limiting.
